@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 
-let API_key = '3ad21ebc75575a4dc74292da331c65a7'
+let API_key = 'e52edf556533bb9c65e33accded73112'
 
 
-class Wether extends Component {
+class Weather extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,11 +16,10 @@ class Wether extends Component {
 
     componentDidMount() {
         this.getPosition();
+        this.getWether();
         setInterval(()=> this.timeBuilder(),1000)
     }
-    componentWillUpdate() {
-        this.getWether();
-    }
+
 
     dateBuilder = (d) => {
         let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -47,8 +46,9 @@ class Wether extends Component {
 
     getWether = async() => {
 
-        const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${this.state.lat}&lon=${this.state.long}&appid=${API_key}`)
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=katowice&appid=${API_key}`)
         const data = await response.json();
+        console.log(data)
         this.setState({weather: data});
     }
     render() {
@@ -77,4 +77,4 @@ class Wether extends Component {
             </div>
         )
     }
-} export default Wether;
+} export default Weather;
