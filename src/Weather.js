@@ -16,7 +16,7 @@ class Weather extends Component {
 
     componentDidMount() {
         this.getPosition();
-        this.getWether();
+        this.getWeather();
         setInterval(()=> this.timeBuilder(),1000)
     }
 
@@ -40,27 +40,24 @@ class Weather extends Component {
         navigator.geolocation.getCurrentPosition((position) => {
             let lat = position.coords.latitude;
             let long = position.coords.longitude;
-            this.setState({lat: lat, long:long})
+            const roundLat = lat.toFixed(2);
+            const roundLong = long.toFixed(2);
+            this.setState({lat: roundLat, long: roundLong})
+            console.log(this.state.lat);
+            console.log(this.state.long);
         })
     }
 
-    getWether = async() => {
+    getWeather = async() => {
 
         const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=katowice&appid=${API_key}`)
         const data = await response.json();
-        console.log(data)
+        console.log(data);
         this.setState({weather: data});
     }
     render() {
         return (
             <div>
-                <div className='search__box'>
-                    <input
-                        type='text'
-                        className='search__bar'
-                        placeholder='Search in Google...'
-                    />
-                </div>
                 {(typeof this.state.weather.main != 'undefined') ? (
                 <div className='main__info'>
                     <div className='location__box'>

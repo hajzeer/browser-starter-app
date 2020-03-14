@@ -31,6 +31,7 @@ body {
   border-radius: 20px;
   transform: scale(1);
   transition: transform .3s ease-in-out;
+
 }
 .search__bar:focus {
   color: black;
@@ -44,8 +45,17 @@ body {
 
   color: black;
   opacity: 1;
-  text-align: center;
   font-weight: bold;
+  text-align: center;
+}
+@import url('https://css.gg/search.css');
+.search__button {
+background: none;
+border: none;
+width: 30px;
+height: 40px;
+padding: 0;
+
 }
 
 .main__info {
