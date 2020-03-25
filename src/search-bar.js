@@ -5,7 +5,7 @@ class  SearchBar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            item:'',
+            item: {},
         }
 
         this.handleSearch = this.handleSearch.bind(this);

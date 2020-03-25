@@ -9,8 +9,8 @@ class Weather extends Component {
         this.state = {
             weather: {},
             time: new Date(),
-            lat: undefined,
-            long: undefined,
+            lat: null,
+            long: null,
         }
     }
 
@@ -18,8 +18,8 @@ class Weather extends Component {
         this.getPosition();
         this.getWeather();
         setInterval(()=> this.timeBuilder(),1000)
-    }
 
+    }
 
     dateBuilder = (d) => {
         let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -40,8 +40,8 @@ class Weather extends Component {
         navigator.geolocation.getCurrentPosition((position) => {
             let lat = position.coords.latitude;
             let long = position.coords.longitude;
-            const roundLat = lat.toFixed(2);
-            const roundLong = long.toFixed(2);
+            const roundLat = parseFloat(lat.toFixed(2));
+            const roundLong = parseFloat(long.toFixed(2));
             this.setState({lat: roundLat, long: roundLong})
             console.log(this.state.lat);
             console.log(this.state.long);
@@ -49,12 +49,15 @@ class Weather extends Component {
     }
 
     getWeather = async() => {
-
+        this.getPosition();
         const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=katowice&appid=${API_key}`)
         const data = await response.json();
         console.log(data);
         this.setState({weather: data});
     }
+    
+
+
     render() {
         return (
             <div>

@@ -27,18 +27,9 @@ body {
   opacity: .5;
   border: none;
   border-bottom: white;
-  color: white;
-  border-radius: 20px;
-  transform: scale(1);
-  transition: transform .3s ease-in-out;
-
-}
-.search__bar:focus {
   color: black;
   font-weight: bold;
-  transform: scale(1.2);
-  transition: transform .3s ease-in-out;
-
+  border-radius: 20px;
 }
 
 .search__bar::placeholder {
@@ -55,6 +46,7 @@ border: none;
 width: 30px;
 height: 40px;
 padding: 0;
+margin-left: -30px;
 
 }
 
