@@ -17,13 +17,9 @@ class Weather extends Component {
     componentDidMount() {
         this.getPosition();
         this.getWeather();
-        const interv = setInterval(() => this.getWeather(),10000);
+        setInterval(() => this.getWeather(),10000);
 
         setInterval(() => this.timeBuilder(),1000);
-    }
-
-    componentWillUnmount() {
-        this.getWeather();
     }
 
     dateBuilder = (d) => {
@@ -48,17 +44,19 @@ class Weather extends Component {
             const roundLat = parseFloat(lat);
             const roundLong = parseFloat(long);
             this.setState({lat: roundLat, long: roundLong})
-            console.log(this.state.lat);
-            console.log(this.state.long);
         })
     }
 
     getWeather = async() => {
+        try{
         this.getPosition();
         const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${this.state.lat}&lon=${this.state.long}&appid=${API_key}`)
         const data = await response.json();
         console.log(data);
         this.setState({weather: data});
+        } catch(error) {
+            console.log(error)
+        }
     }
     
 
@@ -78,7 +76,7 @@ class Weather extends Component {
                         <div className='wether'>{this.state.weather.weather[0].main}</div>
                     </div>
                 </div>
-                ): (<h1 className='location__box'>Oops! We have a problem</h1>)}
+                ): (<h1 className='location__box'>Loading...</h1>)}
             </div>
         )
     }
