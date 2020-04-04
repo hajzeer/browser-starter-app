@@ -11,9 +11,13 @@ class  SearchBar extends Component {
         this.handleSearch = this.handleSearch.bind(this);
     }
 
+    handleChange = (e) => {
+        this.setState({item: e.target.value});
+    }
+    
     handleSearch = (e) => {
         e.preventDefault();
-        this.setState({item: e.target.value})
+        window.location.replace("http://google.com/search?q=" + encodeURIComponent(this.state.item));
     }
 
   render() {
@@ -23,9 +27,9 @@ class  SearchBar extends Component {
                 type='text'
                 className='search__bar'
                 placeholder='Search in Google...'
-                onChange={this.handleSearch}
+                onChange={this.handleChange}
             />
-            <button className='search__button' type='submit'>
+            <button className='search__button' type='submit' onClick={this.handleSearch}>
                 <i className='gg-search'></i>
             </button>
         </form>
